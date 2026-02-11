@@ -4,14 +4,14 @@ services:
     container_name: easyrag-backend
     restart: unless-stopped
     ports:
-      - "7772:3000"
+      - "3000:3000"
     environment:
-      - NODE_ENV=production
-      - DATABASE_HOST=postgres
-      - DATABASE_PORT=5432
-      - DATABASE_USER=${DATABASE_USER:-easyrag}
+      - NODE_ENV=${NODE_ENV}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_USER=${DATABASE_USER}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_NAME=${DATABASE_NAME:-easyrag}
+      - DATABASE_NAME=${DATABASE_NAME}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - JWT_SECRET=${JWT_SECRET}
@@ -36,19 +36,6 @@ services:
       timeout: 10s
       retries: 3
 
-  # mcp:
-  #   image: bpmconseil/easyrag-mcp:latest
-  #   container_name: easyrag-mcp
-  #   restart: unless-stopped
-  #   ports:
-  #     - "8765:8765"
-  #   environment:
-  #     - DATABASE_URL=postgresql://${MCP_DB_USER:-mcp}:${MCP_DB_PASSWORD}@mcp-vector-db:5432/${MCP_DB_NAME:-mcpdb}
-  #     - OPENAI_API_KEY=${OPENAI_API_KEY}
-  #   depends_on:
-  #     mcp_vector:
-  #       condition: service_healthy
-
   llm:
     image: bpmconseil/easyrag-llm:latest
     container_name: easyrag-llm
@@ -66,7 +53,7 @@ services:
     container_name: easyrag-webapp
     restart: unless-stopped
     ports:
-      - "7771:80"
+      - "80:80"
     depends_on:
       - backend
 

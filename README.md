@@ -58,15 +58,6 @@ The API will be available at:
 - `PGVECTOR_PORT`: Port for the LLM vector database.
 - `PGVECTOR_DATABASE`: Database name for the LLM vector database.
 
-### License
-- `LICENSE_PUBLIC_KEY`: Base64 Ed25519 public key to validate licenses.
-- `LICENSE_KEY`: Optional license key value.
-- `LICENSE_FILE_PATH`: Path to license file (default `/data/license.key`).
-- `LICENSE_VALIDATION_URL`: License validation service URL.
-- `LICENSE_SERVICE_URL`: License service URL for admin operations.
-- `LICENSE_VALIDATION_INTERVAL_HOURS`: Hours between validation checks.
-- `LICENSE_OFFLINE_GRACE_DAYS`: Days allowed offline before downgrade to Free.
-
 ### Internal service auth
 - `NODE_INTERNAL_TOKEN_PRIVATE_KEY`: Base64 Ed25519 private key for internal tokens.
 - `INTERNAL_TOKEN_PUBLIC_KEY`: Base64 Ed25519 public key for internal tokens.
@@ -93,5 +84,4 @@ Contact us for the latest plan details and onboarding guidance.
 
 ## Notes
 
-- The MCP service block is commented out by default. Uncomment it if you plan to run MCP servers.
-- For production deployments, set strong secrets and use a reverse proxy for TLS.
+- For production deployments, set strong secrets and use a reverse proxy for TLS.s
