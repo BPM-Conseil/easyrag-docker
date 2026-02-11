@@ -21,6 +21,8 @@ services:
       - CLIENT_ORIGIN=${CLIENT_ORIGIN}
       - ENCRYPTION_KEY=${ENCRYPTION_KEY}
       - DOCUMENT_STORAGE_PATH=/data/documents
+      - LICENSE_KEY=${LICENSE_KEY:-}
+      - NODE_INTERNAL_TOKEN_PRIVATE_KEY=${NODE_INTERNAL_TOKEN_PRIVATE_KEY:-}
     volumes:
       - documents-data:/data/documents
     depends_on:
@@ -46,6 +48,7 @@ services:
       PGVECTOR_PORT: ${PGVECTOR_PORT}
       PGVECTOR_DATABASE: ${PGVECTOR_DATABASE}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      INTERNAL_TOKEN_PUBLIC_KEY: ${INTERNAL_TOKEN_PUBLIC_KEY:-}
     restart: unless-stopped
 
   webapp:

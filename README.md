@@ -84,4 +84,5 @@ Contact us for the latest plan details and onboarding guidance.
 
 ## Notes
 
-- For production deployments, set strong secrets and use a reverse proxy for TLS.s
+- Internal token authentication between the backend and LLM service is optional and only enabled when you provide the internal token keys.
+- For production deployments, set strong secrets and use a reverse proxy for TLS.
