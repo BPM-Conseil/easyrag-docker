@@ -49,7 +49,11 @@ The API will be available at:
 - `CLIENT_ORIGIN`: Public URL of the web app used for CORS.
 
 ### LLM / embeddings
-- `OPENAI_API_KEY`: OpenAI API key for embeddings.
+- `INTERNAL_LLM_PROVIDER`: Internal provider used by rag-service (`openai` or `mistral`).
+- `INTERNAL_LLM_API_KEY`: API key for the selected `INTERNAL_LLM_PROVIDER`.
+- `INTERNAL_EMBEDDING_MODEL`: Optional embedding model override.
+- `SYSTEM_PROMPT_MODEL`: Optional prompt-generation model override.
+- `OPENAI_API_KEY`: Optional fallback for backward compatibility when `INTERNAL_LLM_API_KEY` is not set.
 
 ### LLM service vector database
 - `PGVECTOR_USER`: Postgres user for the LLM vector database.
