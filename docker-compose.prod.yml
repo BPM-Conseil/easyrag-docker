@@ -54,6 +54,8 @@ services:
   webapp:
     image: bpmconseil/easyrag-webapp:latest
     container_name: easyrag-webapp
+    env_file:
+      - .env
     restart: unless-stopped
     ports:
       - "80:80"
