@@ -2,7 +2,7 @@
 
 This repository contains the production Docker Compose setup for EasyRAG.
 
-Website: https://easyrag.world (coming soon)
+Website: https://easyrag.cloud
 
 ## Quick start
 
@@ -29,6 +29,9 @@ The API will be available at:
 ## Environment variables
 
 ### Backend database
+- `NODE_ENV`: Runtime environment (default `test`).
+- `DATABASE_HOST`: Postgres host for the main EasyRAG database.
+- `DATABASE_PORT`: Postgres port for the main EasyRAG database.
 - `DATABASE_USER`: Postgres user for the main EasyRAG database.
 - `DATABASE_PASSWORD`: Postgres password for the main EasyRAG database.
 - `DATABASE_NAME`: Postgres database name for EasyRAG.
@@ -55,6 +58,12 @@ The API will be available at:
 - `SYSTEM_PROMPT_MODEL`: Optional prompt-generation model override.
 - `OPENAI_API_KEY`: Optional fallback for backward compatibility when `INTERNAL_LLM_API_KEY` is not set.
 
+### Public shared LLM credential (optional)
+- `PUBLIC_LLM_API_KEY`: API key exposed as a shared credential for all users.
+- `PUBLIC_LLM_PROVIDER`: Provider for the shared credential (`openai`, `mistral`).
+- `PUBLIC_LLM_NAME`: Display name for the shared credential.
+- `PUBLIC_LLM_DAILY_MESSAGE_LIMIT`: Per-user daily cap when using the shared credential.
+
 ### LLM service vector database
 - `PGVECTOR_USER`: Postgres user for the LLM vector database.
 - `PGVECTOR_PASSWORD`: Postgres password for the LLM vector database.
@@ -62,9 +71,17 @@ The API will be available at:
 - `PGVECTOR_PORT`: Port for the LLM vector database.
 - `PGVECTOR_DATABASE`: Database name for the LLM vector database.
 
-### Internal service auth
-- `NODE_INTERNAL_TOKEN_PRIVATE_KEY`: Base64 Ed25519 private key for internal tokens.
-- `INTERNAL_TOKEN_PUBLIC_KEY`: Base64 Ed25519 public key for internal tokens.
+### Email verification (optional)
+- `EMAIL_VERIFICATION_TTL_MIN`: Verification token time-to-live (minutes).
+
+### SMTP (optional)
+- `SMTP_HOST`: SMTP server host.
+- `SMTP_TLS_REJECT_UNAUTHORIZED`: Disable TLS verification (`false` or `true`).
+- `SMTP_PORT`: SMTP server port.
+- `SMTP_SECURE`: Use SSL/TLS (`true` or `false`).
+- `SMTP_USER`: SMTP username.
+- `SMTP_PASS`: SMTP password.
+- `EMAIL_FROM`: Default sender address.
 
 ## Plans and functionality
 
@@ -88,5 +105,4 @@ Contact us for the latest plan details and onboarding guidance.
 
 ## Notes
 
-- Internal token authentication between the backend and LLM service is optional and only enabled when you provide the internal token keys.
 - For production deployments, set strong secrets and use a reverse proxy for TLS.
