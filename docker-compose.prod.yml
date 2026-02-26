@@ -23,6 +23,10 @@ services:
       - DOCUMENT_STORAGE_PATH=/data/documents
       - LICENSE_KEY=${LICENSE_KEY:-}
       - NODE_INTERNAL_TOKEN_PRIVATE_KEY=${NODE_INTERNAL_TOKEN_PRIVATE_KEY:-}
+      - PUBLIC_LLM_API_KEY=${PUBLIC_LLM_API_KEY:-}
+      - PUBLIC_LLM_PROVIDER=${PUBLIC_LLM_PROVIDER:-openai}
+      - PUBLIC_LLM_NAME=${PUBLIC_LLM_NAME:-Public API key}
+      - PUBLIC_LLM_DAILY_MESSAGE_LIMIT=${PUBLIC_LLM_DAILY_MESSAGE_LIMIT:-20}
     volumes:
       - documents-data:/data/documents
     depends_on:
