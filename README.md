@@ -49,7 +49,17 @@ The API will be available at:
 - `ENCRYPTION_KEY`: Base64 32-byte encryption key for stored credentials.
 
 ### Frontend
-- `CLIENT_ORIGIN`: Public URL of the web app used for CORS.
+- `CLIENT_ORIGIN`: Allowed frontend URL(s) used for CORS (comma-separated), e.g. `https://chat.mydomain.com,https://platform.mydomain.com`.
+- `PLATFORM_BASE_URL`: URL opened by the Platform button from the chat hub (e.g. `https://platform.mydomain.com`).
+- `LANDING_PAGE_ENABLED`: Keep landing page behavior (`YES`/`NO`).
+
+### Shared auth cookies (chat/platform subdomains)
+- `AUTH_COOKIE_DOMAIN`: Cookie domain for shared auth (e.g. `.mydomain.com`).
+- `AUTH_COOKIE_SAMESITE`: Cookie same-site policy (`lax`, `strict`, `none`).
+
+### Fallback chat
+- `CHAT_FALLBACK_ENABLED`: Enable fallback chat (`YES`/`NO`) for unauthenticated users and users without linked chatbots.
+- `CHAT_FALLBACK_DAILY_LIMIT`: Daily fallback limit per identity (default `3`).
 
 ### LLM / embeddings
 - `INTERNAL_LLM_PROVIDER`: Internal provider used by rag-service (`openai` or `mistral`).
@@ -106,3 +116,4 @@ Contact us for the latest plan details and onboarding guidance.
 ## Notes
 
 - For production deployments, set strong secrets and use a reverse proxy for TLS.
+- Example reverse-proxy split config is available in `nginx-chat-platform.example.conf`.
