@@ -5,32 +5,8 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=${NODE_ENV}
-      - DATABASE_HOST=${DATABASE_HOST}
-      - DATABASE_PORT=${DATABASE_PORT}
-      - DATABASE_USER=${DATABASE_USER}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_NAME=${DATABASE_NAME}
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - JWT_SECRET=${JWT_SECRET}
-      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-15m}
-      - JWT_REFRESH_EXPIRES_IN=${JWT_REFRESH_EXPIRES_IN:-7d}
-      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
-      - CLIENT_ORIGIN=${CLIENT_ORIGIN}
-      - AUTH_COOKIE_DOMAIN=${AUTH_COOKIE_DOMAIN:-}
-      - AUTH_COOKIE_SAMESITE=${AUTH_COOKIE_SAMESITE:-lax}
-      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
-      - DOCUMENT_STORAGE_PATH=/data/documents
-      - CHAT_FALLBACK_ENABLED=${CHAT_FALLBACK_ENABLED:-NO}
-      - CHAT_FALLBACK_DAILY_LIMIT=${CHAT_FALLBACK_DAILY_LIMIT:-3}
-      - LICENSE_KEY=${LICENSE_KEY:-}
-      - NODE_INTERNAL_TOKEN_PRIVATE_KEY=${NODE_INTERNAL_TOKEN_PRIVATE_KEY:-}
-      - PUBLIC_LLM_API_KEY=${PUBLIC_LLM_API_KEY:-}
-      - PUBLIC_LLM_PROVIDER=${PUBLIC_LLM_PROVIDER:-openai}
-      - PUBLIC_LLM_NAME=${PUBLIC_LLM_NAME:-Public API key}
-      - PUBLIC_LLM_DAILY_MESSAGE_LIMIT=${PUBLIC_LLM_DAILY_MESSAGE_LIMIT:-20}
+    env_file:
+      - .env
     volumes:
       - documents-data:/data/documents
     depends_on:
@@ -40,6 +16,8 @@ services:
         condition: service_started
       llm:
         condition: service_started
+    # extra_hosts:
+    #   - "easyrag.domain.com:IP_ADDRESS"
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000"]
       interval: 30s
@@ -60,6 +38,9 @@ services:
       INTERNAL_EMBEDDING_MODEL: ${INTERNAL_EMBEDDING_MODEL:-}
       SYSTEM_PROMPT_MODEL: ${SYSTEM_PROMPT_MODEL:-}
       INTERNAL_TOKEN_PUBLIC_KEY: ${INTERNAL_TOKEN_PUBLIC_KEY:-}
+      SERPER_API_KEY: ${SERPER_API_KEY:-}
+    # extra_hosts:
+    #   - "easyrag.domain.com:IP_ADDRESS"
     restart: unless-stopped
 
   webapp:
